@@ -1,0 +1,30 @@
+modules:
+  macro:
+    - key: didi-transport-dashboard-macro
+      resource: main
+      render: native
+      resolver:
+        function: resolver
+      title: DIDI Transport-dashboard
+      description: Button "Bericht erstellen" schreibt alle Tickets im Status "Ready
+        for deployment" inkl. Abhängigkeits-Check direkt in die Wiki-Seite.
+      config: true
+  function:
+    - key: resolver
+      handler: index.handler
+
+resources:
+  - key: main
+    path: src/frontend/index.tsx
+
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/c8997da5-86fd-41aa-8d4f-fad53dec0c0c
+
+permissions:
+  scopes:
+    - read:jira-work
+    - read:jira-user
+    - read:page:confluence
+    - write:page:confluence
